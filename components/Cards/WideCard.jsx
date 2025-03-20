@@ -2,6 +2,7 @@ import Image from "next/image"
 import { CiTimer } from "react-icons/ci";
 import { SiStagetimer } from "react-icons/si";
 import { FaStar } from "react-icons/fa";
+import Link from "next/link";
 
 // Component to display item information with an icon and text
 const ItemInfo = ({ text, icon }) => (
@@ -24,8 +25,8 @@ const ContainerItemsInfo = ({ time, difficulty }) => {
                             ${difficulty == "Fácil"
                                 ? "fill-flavor-1"
                                 : difficulty == "Intermedio"
-                                ? "fill-amber-400"
-                                : "fill-red-500"
+                                    ? "fill-amber-400"
+                                    : "fill-red-500"
                             }
                         `}
                     />
@@ -36,12 +37,12 @@ const ContainerItemsInfo = ({ time, difficulty }) => {
 };
 
 // Component to display an image with a gradient overlay
-const ImageCard = ({ image }) => {
+const ImageCard = ({ image, title }) => {
     return (
         <>
             <Image
                 src={image}
-                alt="recipe"
+                alt={title}
                 width={396}
                 height={220}
                 quality={80}
@@ -58,7 +59,7 @@ const ImageCard = ({ image }) => {
 const CardInfo = ({ title, likes }) => {
     return (
         <div className="flex justify-between">
-            <h3 className="text-xl font-light">{title}</h3>
+            <h3 className="text-xl font-light truncate">{title}</h3>
             <span className="flex items-center gap-1">
                 <FaStar size={20} className="fill-amber-400" /> {likes}
             </span>
@@ -67,15 +68,20 @@ const CardInfo = ({ title, likes }) => {
 };
 
 // Main CardLong component that combines all the above components
-const WideCard = ({}) => {
+const WideCard = ({ data }) => {
     return (
-        <div className="max-w-[396px] flex flex-col gap-2 max-h-[260px] hover:scale-105 transition-transform duration-300">
-            <div className="relative rounded-xl overflow-hidden ">
-                <ContainerItemsInfo time="30'" difficulty="Fácil" />
-                <ImageCard image="/image/recipe.png" />
-            </div>
-            <CardInfo title="Título de la receta" likes="120" />
-        </div>
+        <Link href={{
+            pathname: `/receta/${encodeURIComponent(data.name)}`,
+            query: { id: data.id }
+        }}>
+            <div className="max-w-[396px] flex flex-col gap-2 max-h-[260px] hover:scale-105 transition-transform duration-300">
+                <div className="relative rounded-xl overflow-hidden ">
+                    <ContainerItemsInfo time={`${data.time}'`} difficulty={data.difficulty} />
+                    <ImageCard image={data.image} title={data.name} />
+                </div>
+                <CardInfo title={data.name} likes="120" />
+            </div >
+        </Link>
     );
 };
 

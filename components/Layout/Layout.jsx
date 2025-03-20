@@ -1,17 +1,19 @@
+import { header } from "@/styles/animate-navbar.module.css"
 import React from "react";
 import Navbar from "./Navbar";
 
 const Layout = ({ children }) => {
 
     return (
-        <div className="h-screen grid grid-rows-[auto,1fr,auto]">
-            <header className="w-full">
+        <>
+            <header className={`w-full ${header} z-10`}>
                 <Navbar />
             </header>
-            <main className={`w-full mt-[70px] lg:px-26 md:px-12 px-4`} >{children}</main> {/* Ajustar el margen superior */}
-            <footer>
+            <main className={`w-full `} >{children}</main> {/* Ajustar el margen superior */}
+            <footer className="w-full h-15 bg-flavor-1 text-center text-white p-5">
+                <p>@todos los derechos reservados</p>
             </footer>
-        </div>
+        </>
     )
 }
 

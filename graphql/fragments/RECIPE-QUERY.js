@@ -1,10 +1,18 @@
 import { gql } from "@apollo/client";
 
-export const DETAILS_RECIPE_FRAGMENT = gql`
-    fragment DetailsRecipe on RecetaType {
-            id
-            name
-            description
-        }
+export const BASIC_DETAILS_RECIPE_FRAGMENT = gql`
+    fragment BasicDetalisRecipe on RecetaType {
+        image
+        name
+        id
+        time
+        difficulty
+    }
+`
+export const ALL_DETAILS_RECIPE_FRAGMENT = gql`
+    fragment AllDetalisRecipe on RecetaType {
+        ...BasicDetailRecipe
+    }
 
+    ${BASIC_DETAILS_RECIPE_FRAGMENT}
 `

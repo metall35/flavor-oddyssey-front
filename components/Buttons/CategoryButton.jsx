@@ -1,19 +1,19 @@
 import Image from "next/image"
 
-const CategoryButton = () => {
+const CategoryButton = ({ classes, image, text }) => {
     return (
-        <button className="max-w-24">
+        <button className={`${classes} text-sm text-center`}>
             <Image
-                src={"/image/recipe.png"}
-                alt="recipe"
+                src={image}
+                alt={text}
                 width={96}
                 height={96}
-                quality={80}
+                quality={90}
                 placeholder="blur"
                 blurDataURL="/image/recipe.png"
-                className="rounded-full h-auto object-cover "
+                className="rounded-full h-auto aspect-square object-cover "
             />
-            Categoria
+            {text}
         </button>
     )
 

@@ -3,11 +3,14 @@ import Link from "next/link";
 import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
 import { useState } from "react";
 import GeneralButton from "../Buttons/GeneralButton";
+import useIntersectionOberserver from "@/hooks/useIntersectionObserver";
+import Search from "../Controls/Search";
 
 const ButtonLogIn = () => <GeneralButton text="Iniciar sesión" classes="bg-gray-400 shadow-gray-400/50 hover:shadow-gray-500/50 hover:bg-gray-500 hover:scale-105 transition-transform duration-300 " />
-const ButtonRegister = () =>  <GeneralButton text="Registrarse" classes="bg-flavor-2 shadow-flavor-2/50 hover:shadow-flavor-1/50 hover:bg-flavor-1 hover:scale-105 transition-transform duration-300 " />
+const ButtonRegister = () => <GeneralButton text="Registrarse" classes="bg-flavor-2 shadow-flavor-2/50 hover:shadow-flavor-1/50 hover:bg-flavor-1 hover:scale-105 transition-transform duration-300 " />
 
 const Navbar = () => {
+    const { isVisible: isVisibleSearch } = useIntersectionOberserver()
     const [isOpen, setIsOpen] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);
 
@@ -25,12 +28,12 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="navbar flex justify-between items-center lg:px-26 md:px-12 px-4 bg-white fixed w-full z-20 shadow-md dark">
+            <nav className="navbar flex justify-between items-center lg:px-26 md:px-12 py-2 px-4 bg-white w-full shadow-md dark border-b-2">
                 <figure className="flex gap-2 items-center p-1">
                     <Image
                         src="/logo-flavor.svg"
                         alt="recipe"
-                        width={80}
+                        width={60}
                         height={60}
                         priority
                         placeholder="blur"
@@ -51,7 +54,7 @@ const Navbar = () => {
                 </button>
             </nav>
             {(isOpen || isAnimating) && (
-                <div className={`mt-[90px] fixed z-10 w-full flex justify-center ${isAnimating ? 'animate-slide-up' : 'animate-slide-down'}`} >
+                <div className={`z-20 w-full flex justify-center ${isAnimating ? 'animate-slide-up' : 'animate-slide-down'}`} >
                     <div className="bg-white rounded-2xl p-4 w-11/12 shadow-md">
                         <ul className="flex flex-col font-medium border-b-2 p-1">
                             {["Inicio", "Recetas", "Planea tu menú"].map((item, index) => (
@@ -64,6 +67,14 @@ const Navbar = () => {
                             <ButtonLogIn />
                             <ButtonRegister />
                         </div>
+                    </div>
+                </div>
+            )}
+            {isVisibleSearch && (
+                <div className="w-full bg-white animate-slide-down shadow-md p-5 flex justify-between flex-wrap border ">
+                    <div></div>
+                    <div className="md:w-1/2 w-full block">
+                        <Search />
                     </div>
                 </div>
             )}

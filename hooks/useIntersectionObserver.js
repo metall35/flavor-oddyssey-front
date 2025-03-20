@@ -1,18 +1,29 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
+import { useIntersectionStore } from "./useStore";
+import { usePathname } from "next/navigation";
 
-const useIntersectionOberserver = () => {
-    const targetRef = useRef(null);
-    const [isVisible, setIsVisible] = useState(false);
+const useIntersectionObserver = () => {
+    const { targetRef, isVisible, setTargetRef, setIsVisible } = useIntersectionStore()
+    const pathname = usePathname()
 
     useEffect(() => {
-        const targetNode = targetRef.current;
+        const targetNode = targetRef
+
+        if (!targetNode || !(targetNode instanceof Element)) {
+            console.error("targetRef no es un elemento válido:", targetNode);
+            return;
+        }
 
         const callback = (entries, observer) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
+                if (pathname == "/") {
+                    if (entry.isIntersecting) {
+                        setIsVisible(false);
+                    } else {
+                        setIsVisible(true);
+                    }
                 } else {
-                    setIsVisible(false);
+                    setIsVisible(true)
                 }
             });
         };
@@ -24,12 +35,13 @@ const useIntersectionOberserver = () => {
         return () => {
             observer.disconnect();
         };
-    }, []);
+    }, [targetRef, setIsVisible]);
 
     return {
         targetRef,
-        isVisible
+        isVisible,
+        setTargetRef
     }
 }
 
-export default useIntersectionOberserver
+export default useIntersectionObserver
