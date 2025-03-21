@@ -30,7 +30,7 @@ const SectionCard = ({ data }) => {
         <Container className="flex flex-col justify-center items-center gap-20 bg-white/30 py-10">
             <div className="flex gap-10">
                 {card.map(card => (
-                    <Link href={card.link}>
+                    <Link href={card.link} key={card.title}>
                         <ShortCard title={card.title} icon={card.icon} />
                     </Link>
                 ))}
