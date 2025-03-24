@@ -3,7 +3,16 @@ import { FormLogin, FormRegister } from './Form';
 import { useLogin } from '@/hooks/useLogin';
 
 const LoginSection = () => {
-    const { selectedTab, setSelectedTab, handleRegisterSubmit, errorLogin, errorRegister, handleLoginSubmit } = useLogin()
+    const { 
+        selectedTab, 
+        setSelectedTab, 
+        handleRegisterSubmit, 
+        errorLogin, 
+        errorRegister, 
+        handleLoginSubmit, 
+        loadingLogin, 
+        loadingRegister 
+    } = useLogin();
     return (
         <section className='flex md:flex-col-reverse lg:flex-row gap-4 p-4 md:p-8 w-full mt-10 mb-92 md:mb-30 lg:mb-12'>
             <Image
@@ -39,9 +48,9 @@ const LoginSection = () => {
                 </div>
                 {
                     selectedTab === 'login' ? (
-                        <FormLogin error={errorLogin} handleSubmit={handleLoginSubmit} />
+                        <FormLogin error={errorLogin} handleSubmit={handleLoginSubmit} loading={loadingLogin} />
                     ) : (
-                        <FormRegister error={errorRegister} handleSubmit={handleRegisterSubmit} />
+                        <FormRegister error={errorRegister} handleSubmit={handleRegisterSubmit} loading={loadingRegister} />
                     )
                 }
             </div>

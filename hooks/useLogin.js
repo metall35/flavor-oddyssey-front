@@ -1,4 +1,4 @@
-import { CREATE_USER } from '@/graphql/mutations/LOGIN-MUTATIONS';
+import { CREATE_USER, LOGIN } from '@/graphql/mutations/LOGIN-MUTATIONS';
 import { useMutation } from '@apollo/client';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
@@ -17,18 +17,49 @@ export const useLogin = () => {
         }
     });
 
+    const [Login, resultLogin] = useMutation(LOGIN, {
+        onError: (error) => {
+            setErrorLogin({ status: true, message: "el nombre de usuario o la contraseña son incorrectos." });
+        }
+    });
+
+    console.log(resultLogin)
+
     useEffect(() => {
 
         if (resultRegister.data) {
-            Cookies.set('tokenFlavorOdyssey ', resultRegister.data.createUser.token, { expires: 1 / 24 });
+            Cookies.set('tokenFlavorOdyssey', resultRegister.data.createUser.token, { expires: 1 / 24 });
             router.push('/');
         }
 
-    }, [resultRegister.data]);
+        if (resultLogin.data) {
+            Cookies.set('tokenFlavorOdyssey', resultLogin.data.tokenAuth.token, { expires: 1 / 24 });
+            router.push('/');            
+        }
+
+    }, [resultRegister.data, resultLogin.data]);
 
 
     const handleLoginSubmit = (e) => {
         e.preventDefault();
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+
+        if (email === '' || password === '') {
+            setErrorLogin({ status: true, message: "Todos los campos son obligatorios." });
+        } else {
+            setErrorLogin({ status: false, message: "" });
+            try {
+                Login({
+                    variables: {
+                        email,
+                        password
+                    }
+                });
+            } catch (error) {
+                setErrorLogin({ status: true, message: "Algo a salido mal." });
+            }
+        }
 
     }
 
@@ -64,6 +95,8 @@ export const useLogin = () => {
         handleLoginSubmit,
         handleRegisterSubmit,
         errorRegister,
-        errorLogin
+        errorLogin,
+        loadingLogin: resultLogin.loading, 
+        loadingRegister: resultRegister.loading 
     }
 }

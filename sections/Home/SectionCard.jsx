@@ -5,25 +5,34 @@ import RecipeScrollVertical from "./RecipeScroll/RecipeScrollVertical";
 import Container from "@/components/Sections/Container";
 import { TitleH2 } from "@/components/AuxComponents/Title";
 import GeneralButton from "@/components/Buttons/GeneralButton";
+import useRedirect from "@/hooks/useRedirect";
+import { useRouter } from "next/router";
 
+const card = [
+    {
+        link: "/categorias",
+        title: "Todas las categorias",
+        icon: <PiChefHat size={100} className="fill-flavor-2" />
+    },
+    // {
+    //     link: "/categorias",
+    //     title: "Planea tu semana",
+    //     icon: "Planea tu semana",
+    // },
+    {
+        link: "/categorias",
+        title: "Alimentos disponibles",
+        icon: <PiBowlFood size={100} className="fill-flavor-2" />
+    }
+]
 const SectionCard = ({ data }) => {
-    const card = [
-        {
-            link: "/categorias",
-            title: "Todas las categorias",
-            icon: <PiChefHat size={100} className="fill-flavor-2" />
-        },
-        // {
-        //     link: "/categorias",
-        //     title: "Planea tu semana",
-        //     icon: "Planea tu semana",
-        // },
-        {
-            link: "/categorias",
-            title: "Alimentos disponibles",
-            icon: <PiBowlFood size={100} className="fill-flavor-2" />
-        }
-    ]
+    const { path } = useRedirect({ DestinationPath: "/Search" });
+    const router = useRouter()
+    
+    const handleRedirect = () => {
+        router.push(path)
+    }
+
 
 
     return (
@@ -43,7 +52,11 @@ const SectionCard = ({ data }) => {
                     Inspira a otros y encuentra nuevas delicias culinarias mientras creas y
                     contribuyes con tus platillos favoritos.
                 </p>
-                <GeneralButton text="Empieza" classes="bg-flavor-2 shadow-flavor-2/50 hover:shadow-flavor-1/50 hover:bg-flavor-1 hover:scale-105 transition-transform duration-300 mt-10" />
+                <GeneralButton
+                    text="Empieza"
+                    classes="bg-flavor-2 shadow-flavor-2/50 hover:shadow-flavor-1/50 hover:bg-flavor-1 hover:scale-105 transition-transform duration-300 mt-10"
+                    onClick={handleRedirect}
+                />
             </div>
 
             <RecipeScrollVertical data={data} />

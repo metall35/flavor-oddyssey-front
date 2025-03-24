@@ -2,12 +2,15 @@ import GeneralButton from "@/components/Buttons/GeneralButton";
 import NotifyError from "@/components/Errors/NotifyError";
 import Input from "@/components/FormInputs/Input";
 
-const ButtonSubmit = ({ text }) => (
+const ButtonSubmit = ({ text, loading, disabled }) => (
     <div className="flex justify-center mt-5">
         <GeneralButton
-            text={text}
+            text={loading ? "Cargando..." : text}
             type="submit"
-            classes="bg-flavor-2 shadow-flavor-2/50 hover:shadow-flavor-1/50 hover:bg-flavor-1 hover:scale-105 transition-transform duration-300"
+            disabled={disabled}
+            classes={`bg-flavor-2 shadow-flavor-2/50 hover:shadow-flavor-1/50 hover:bg-flavor-1 hover:scale-105 transition-transform duration-300 ${
+                disabled ? "opacity-50 cursor-not-allowed" : ""
+            }`}
         />
     </div>
 );
@@ -21,23 +24,23 @@ const Form = ({ children, onSubmit, error }) => {
     )
 }
 
-export const FormLogin = ({ handleSubmit, error}) => {
+export const FormLogin = ({ handleSubmit, error, loading }) => {
     return (
         <Form onSubmit={handleSubmit} error={error}>
-            <Input type="email" name="email" label="Correo electrónico" required error={{ status: error.status }} />
+            <Input type="email" name="email" label="Correo electronico" required error={{ status: error.status }} />
             <Input type="password" name="password" label="Contraseña" required error={{ status: error.status }} />
-            <ButtonSubmit text="Iniciar sesión" />
+            <ButtonSubmit text="Iniciar sesión" loading={loading} disabled={loading} />
         </Form>
     );
 };
 
-export const FormRegister = ({ handleSubmit, error }) => {
+export const FormRegister = ({ handleSubmit, error, loading }) => {
     return (
         <Form onSubmit={handleSubmit} error={error}>
             <Input type="text" name="username" label="Nombre de usuario" required error={{ status: error.status }} />
             <Input type="email" name="email" label="Correo electrónico" required error={{ status: error.status }} />
             <Input type="password" name="password" label="Contraseña" required error={{ status: error.status }} />
-            <ButtonSubmit text="Registrarse" />
+            <ButtonSubmit text="Registrarse" loading={loading} disabled={loading} />
         </Form>
     );
 };
