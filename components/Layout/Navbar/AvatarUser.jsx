@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -15,9 +16,11 @@ const AvatarUser = ({ user }) => {
 
     return (
         <div className="relative inline-block">
-            <img
-                src={user.photo} // Reemplaza con la ruta de la imagen del avatar
+            <Image
+                src={user.photo}
                 alt="User Avatar"
+                width={48}
+                height={48}
                 className="w-12 h-12 rounded-full cursor-pointer "
                 onClick={toggleMenu}
             />

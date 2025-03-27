@@ -3,9 +3,7 @@ import { initializeApollo } from "@/lib/apolloClient"; // Importar la función p
 import HomeSection from "@/sections/Home/HomeSection";
 
 const Home = ({ result }) => {
-  // console.log(result); // Imprimir los resultados de la consulta en la consola
-  console.log(result);
-  
+
   return (
     <>
       <HomeSection data={result} />
@@ -14,10 +12,13 @@ const Home = ({ result }) => {
 }
 
 export const getStaticProps = async () => {
-  const apolloClient = initializeApollo(); // Inicializar el cliente de Apollo
+  const apolloClient = initializeApollo();
   const { data } = await apolloClient.query({
     query: HOME_QUERIES, // Realizar la consulta GraphQL
   });
+
+  const responseSize = JSON.stringify(data).length; // Calcular el tamaño de la respuesta
+  console.log(`Tamaño de la respuesta en el servidor: ${responseSize} bytes`); // Imprimir en el servidor
 
   return {
     props: {

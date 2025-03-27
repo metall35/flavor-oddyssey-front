@@ -14,6 +14,12 @@ module.exports = {
                 port: '8000',
                 pathname: '/media/categorias/**',
             },
+            {
+                protocol: 'http',
+                hostname: 'localhost', 
+                port: '8000',
+                pathname: '/media/users/**',
+            },
         ],
     },
 };
