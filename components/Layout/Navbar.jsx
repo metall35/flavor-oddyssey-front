@@ -7,25 +7,21 @@ import NavMobile from "./Navbar/NavMobile";
 import SearchBar from "./Navbar/SearchBar";
 import ButtonRegister from "./Navbar/ButtonRegister";
 import AvatarUser from "./Navbar/AvatarUser";
-import { useAuthStore } from "@/hooks/useStore";
+import { useUser } from "@/hooks/useUser";
 
 
 
 const Navbar = () => {
     const { isVisible: isVisibleSearch } = useIntersectionOberserver();
-    const { user } = useAuthStore()
+    const { data: user } = useUser(); // Obtén el usuario usando el nuevo hook
     const [isOpen, setIsOpen] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);
-
-    
-const items = [
-    { name: "Inicio", href: "/" },
-    { name: "Recetas", href: "/recipes" },
-    { name: "Planea tu menú", href: "/menu" },
-    { name: user ? <AvatarUser user={user} /> : <ButtonRegister />, href: user ? "" : "/login" },
-
-
-]
+    const items = [
+        { name: "Inicio", href: "/" },
+        { name: "Recetas", href: "/recipes" },
+        { name: "Planea tu menú", href: "/menu" },
+        { name: user ? <AvatarUser user={user} /> : <ButtonRegister />, href: user ? "" : "/login" },
+    ]
 
     const toggleMenu = () => {
         if (isOpen) {

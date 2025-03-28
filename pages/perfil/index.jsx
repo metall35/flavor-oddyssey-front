@@ -1,17 +1,16 @@
-import { USER_PERFIL_QUERY } from "@/graphql/fragments/USER-QUERY";
+import { useUser } from "@/hooks/useUser";
 import PerfilSection from "@/sections/perfil/PerfilSection";
-import { useQuery } from "@apollo/client";
 
 const Perfil = () => {
-    const result = useQuery(USER_PERFIL_QUERY);
+    const { data, loading } = useUser();
 
-    if (result.loading) {
+    if (loading) {
         return <div>Cargando...</div>;
     }
 
     return (
         <>
-            <PerfilSection data={result.data} />
+            <PerfilSection data={data} />
         </>
     );
 };

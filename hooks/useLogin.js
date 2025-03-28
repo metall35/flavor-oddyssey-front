@@ -3,9 +3,12 @@ import { useMutation } from '@apollo/client';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { useUser } from './useUser';
+import toast from 'react-hot-toast';
 
 export const useLogin = () => {
     const [selectedTab, setSelectedTab] = useState('login');
+    const { refetch } = useUser()
     const [errorRegister, setErrorRegister] = useState({ status: false, message: '' });
     const [errorLogin, setErrorLogin] = useState({ status: false, message: '' });
 
@@ -29,12 +32,20 @@ export const useLogin = () => {
 
         if (resultRegister.data) {
             Cookies.set('tokenFlavorOdyssey', resultRegister.data.createUser.token, { expires: 1 / 24 });
+            toast.success("Iniciaste sesión.", {
+                duration: 5000
+            })
             router.push('/');
+            refetch()
         }
 
         if (resultLogin.data) {
             Cookies.set('tokenFlavorOdyssey', resultLogin.data.tokenAuth.token, { expires: 1 / 24 });
-            router.push('/');            
+            toast.success("Te has registrado con éxito.", {
+                duration: 5000
+            })
+            router.push('/');
+            refetch()
         }
 
     }, [resultRegister.data, resultLogin.data]);
@@ -96,7 +107,7 @@ export const useLogin = () => {
         handleRegisterSubmit,
         errorRegister,
         errorLogin,
-        loadingLogin: resultLogin.loading, 
-        loadingRegister: resultRegister.loading 
+        loadingLogin: resultLogin.loading,
+        loadingRegister: resultRegister.loading
     }
 }

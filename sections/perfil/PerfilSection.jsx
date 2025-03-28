@@ -31,11 +31,11 @@ const PerfilSection = ({ data }) => {
     const renderContent = () => {
         switch (activeContent) {
             case "informacion-personal":
-                return <PerfilInformation user={data.currentUser} />;
+                return <PerfilInformation user={data} />;
             case "recetas":
-                return <UserRecipes recipes={data.currentUser.recetas} title="Recetas creadas" />;
+                return <UserRecipes recipes={data.recetas} title="Recetas creadas" />;
             case "likes":
-                return <UserLikes likes={data.currentUser.calificaciones} title="Recetas guardadas" />;
+                return <UserLikes likes={data.calificaciones} title="Recetas guardadas" />;
             default:
                 return <div>Contenido no encontrado</div>;
         }
