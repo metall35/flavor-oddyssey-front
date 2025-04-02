@@ -5,8 +5,8 @@ import { FaStar } from "react-icons/fa";
 import Link from "next/link";
 
 // Component to display item information with an icon and text
-const ItemInfo = ({ text, icon }) => (
-    <span className="flex items-center gap-1 bg-amber-50/90 py-1 px-1.5 rounded-2xl text-xs">
+export const ItemInfo = ({ text, icon, className }) => (
+    <span className={`flex items-center gap-1 bg-amber-50/90 ${className} rounded-2xl shadow-md`}>
         {icon} {text}
     </span>
 );
@@ -15,8 +15,9 @@ const ItemInfo = ({ text, icon }) => (
 const ContainerItemsInfo = ({ time, difficulty }) => {
     return (
         <div className="absolute top-2 w-full flex justify-between px-4 text-black">
-            <ItemInfo text={time} icon={<CiTimer size={18} />} />
+            <ItemInfo text={time} icon={<CiTimer size={18} />} className="px-1.5 py-1 text-xs" />
             <ItemInfo
+                className="py-1 px-1.5 text-xs"
                 text={difficulty}
                 icon={
                     <SiStagetimer
@@ -43,9 +44,9 @@ const ImageCard = ({ image, title }) => {
             <Image
                 src={image}
                 alt={title}
-                width={396}
-                height={220}
-                quality={80}
+                width={1920}
+                height={1080}
+                // quality={80}
                 placeholder="blur"
                 blurDataURL="/image/recipe.png"
                 className="rounded-lg h-auto aspect-video object-cover "

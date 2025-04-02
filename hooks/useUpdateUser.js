@@ -1,4 +1,4 @@
-import { USER_PERFIL_QUERY } from '@/graphql/fragments/USER-QUERY';
+import { USER_PERFIL_QUERY } from '@/graphql/USER-QUERY';
 import { UPDATE_USER_MUTATION } from '@/graphql/mutations/USER-MUTATIONS';
 import { useMutation } from '@apollo/client';
 import { useState } from 'react';

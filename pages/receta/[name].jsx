@@ -1,25 +1,46 @@
+import { SINGLE_RECIPE_QUERY } from "@/graphql/SINGLE-RECIPE-QUERY";
+import { initializeApollo } from "@/lib/apolloClient";
+import RecipeView from "@/sections/Recipe/RecipeView";
 
-const RecipePage = ({ id, name }) => {
+const RecipePage = ({ id, result }) => {
+
+    if (!result) {
+        return (
+            <p>cargando....</p>
+        )
+    }
+
     return (
-        <div>
-            <h1>id: {id}</h1>
-            <h1>name: {name}</h1>
-        </div>
-    )
-}
+        <>
+            <RecipeView data={result} />
+        </>
+    );
+};
 
 export async function getServerSideProps(context) {
-    const { id, name } = context.query;
+    const { id } = context.query;
+    const client = initializeApollo(null, context);
 
+    try {
+        const { data } = await client.query({
+            query: SINGLE_RECIPE_QUERY,
+            variables: { id: `${id}` }, // Forzar string
+        });
 
+        return {
+            props: {
+                result: data?.getReceta || null,
+                id,
+            },
+        };
+    } catch (error) {
+        console.error("❌ Apollo Client Error:", error.message);
 
-    return {
-        props: {
-            name: name || "",
-            id: id || "",
-        },
-    };
+        return {
+            notFound: true, // O devolver una página de error
+        };
+    }
 }
 
 
-export default RecipePage
+export default RecipePage;

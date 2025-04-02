@@ -32,7 +32,7 @@ export const useLogin = () => {
 
         if (resultRegister.data) {
             Cookies.set('tokenFlavorOdyssey', resultRegister.data.createUser.token, { expires: 1 / 24 });
-            toast.success("Iniciaste sesión.", {
+            toast.success("Te has registrado con éxito.", {
                 duration: 5000
             })
             router.push('/');
@@ -41,7 +41,7 @@ export const useLogin = () => {
 
         if (resultLogin.data) {
             Cookies.set('tokenFlavorOdyssey', resultLogin.data.tokenAuth.token, { expires: 1 / 24 });
-            toast.success("Te has registrado con éxito.", {
+            toast.success("Iniciaste sesión.", {
                 duration: 5000
             })
             router.push('/');

@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
-import { CURRENTUSER_FRAGMENT } from "../fragments/USER-QUERY";
+import { CURRENTUSER_FRAGMENT } from "../fragments/COMPOUND-FRAGMENTS";
+
 
 
 export const UPDATE_USER_MUTATION = gql`

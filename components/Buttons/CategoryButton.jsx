@@ -6,8 +6,8 @@ const CategoryButton = ({ classes, image, text }) => {
             <Image
                 src={image}
                 alt={text}
-                width={96}
-                height={96}
+                width={296}
+                height={296}
                 quality={90}
                 placeholder="blur"
                 blurDataURL="/image/recipe.png"
