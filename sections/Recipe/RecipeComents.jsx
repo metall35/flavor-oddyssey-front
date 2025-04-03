@@ -1,10 +1,11 @@
 import { TitleH2 } from "@/components/AuxComponents/Title"
 import Container from "@/components/Sections/Container"
+import { formatRelativeTime } from "@/lib/utils"
 import Image from "next/image"
 
 const RecipeComents = ({ data }) => {
     return (
-        <Container className="mb-10 w-full">
+        <div className="w-full md:pl-26 md:pr-10 px-4">
             <TitleH2 text="Comentarios" />
             <div>
                 agregar comentario
@@ -24,7 +25,7 @@ const RecipeComents = ({ data }) => {
                                     className="rounded-full w-10 h-10 aspect-square object-cover "
                                 />
                                 <div className="w-full">
-                                    <h3 className="flex items-center justify-between" >{coment.usuario.username} <span className="text-xs italic text-black/30">{coment.fecha}</span></h3>
+                                    <h3 className="flex items-center justify-between" >{coment.usuario.username} <span className="text-xs italic text-black/30">{formatRelativeTime(coment.fecha)}</span></h3>
                                     <p className="text-xs mt-1">{coment.texto}</p>
                                 </div>
                             </li>
@@ -32,7 +33,7 @@ const RecipeComents = ({ data }) => {
                     </>
                 )}
             </ul>
-        </Container>
+        </div>
     )
 }
 
