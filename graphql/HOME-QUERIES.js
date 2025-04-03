@@ -3,7 +3,7 @@ import { BASIC_DETAILS_CATEGORY_FRAGMENT, BASIC_DETAILS_RECIPE_FRAGMENT } from '
 
 export const HOME_QUERIES = gql`
     query {
-        recetas {
+        recetas (searchs: []) {
             ...BasicDetailsRecipe
             autor {
                 username

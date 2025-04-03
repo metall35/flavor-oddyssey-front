@@ -5,14 +5,16 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useUser } from './useUser';
 import toast from 'react-hot-toast';
+import { useAuthStore } from './useStore';
 
 export const useLogin = () => {
     const [selectedTab, setSelectedTab] = useState('login');
-    const { refetch } = useUser()
     const [errorRegister, setErrorRegister] = useState({ status: false, message: '' });
     const [errorLogin, setErrorLogin] = useState({ status: false, message: '' });
-
-    const router = useRouter();
+    const { refetch } = useUser()
+    const { login } = useAuthStore()
+    const router = useRouter()
+    const { returnUrl } = router.query
 
     const [Register, resultRegister] = useMutation(CREATE_USER, {
         onError: (error) => {
@@ -26,25 +28,24 @@ export const useLogin = () => {
         }
     });
 
-    console.log(resultLogin)
 
     useEffect(() => {
 
         if (resultRegister.data) {
-            Cookies.set('tokenFlavorOdyssey', resultRegister.data.createUser.token, { expires: 1 / 24 });
+            login(resultRegister.data.createUser.token)
             toast.success("Te has registrado con éxito.", {
                 duration: 5000
             })
-            router.push('/');
+            router.push(returnUrl || "/");
             refetch()
         }
 
         if (resultLogin.data) {
-            Cookies.set('tokenFlavorOdyssey', resultLogin.data.tokenAuth.token, { expires: 1 / 24 });
+            login(resultLogin.data.tokenAuth.token)
             toast.success("Iniciaste sesión.", {
                 duration: 5000
             })
-            router.push('/');
+            router.push(returnUrl || '/');
             refetch()
         }
 

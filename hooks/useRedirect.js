@@ -1,23 +1,19 @@
-
-import { useEffect, useState } from 'react';
 import { useAuthStore } from './useStore';
 
 
-const useRedirect = ({ DestinationPath }) => {
-    const [path, setPath] = useState("/login");
+const useRedirect = () => {
+    const { isAuthenticated } = useAuthStore(); // Asume que tu store tiene esta propiedad
 
-    const { token } = useAuthStore();
-
-
-    useEffect(() => {
-        if (token) {
-            setPath(DestinationPath);
+    const getRedirectPath = (destinationPath) => {
+        if (!isAuthenticated) {
+            // Si no está autenticado, devuelve ruta al login con returnUrl
+            return `/login?returnUrl=${encodeURIComponent(destinationPath)}`;
         }
-    }, [token])
+        // Si está autenticado, devuelve la ruta de destino directamente
+        return destinationPath;
+    };
 
-    return {
-        path,
-    }
+    return { getRedirectPath };
 }
 
 export default useRedirect

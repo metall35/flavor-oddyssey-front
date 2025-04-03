@@ -5,8 +5,8 @@ import RecipeScrollVertical from "./RecipeScroll/RecipeScrollVertical";
 import Container from "@/components/Sections/Container";
 import { TitleH2 } from "@/components/AuxComponents/Title";
 import GeneralButton from "@/components/Buttons/GeneralButton";
-import useRedirect from "@/hooks/useRedirect";
 import { useRouter } from "next/router";
+import useRedirect from "@/hooks/useRedirect";
 
 const card = [
     {
@@ -26,11 +26,11 @@ const card = [
     }
 ]
 const SectionCard = ({ data }) => {
-    const { path } = useRedirect({ DestinationPath: "/Search" });
     const router = useRouter()
+    const { getRedirectPath } = useRedirect()
     
     const handleRedirect = () => {
-        router.push(path)
+        router.push(getRedirectPath("/crear-receta"))
     }
 
 
