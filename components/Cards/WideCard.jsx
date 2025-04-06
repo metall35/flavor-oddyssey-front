@@ -1,8 +1,8 @@
 import Image from "next/image"
 import { CiTimer } from "react-icons/ci";
 import { SiStagetimer } from "react-icons/si";
-import { FaStar } from "react-icons/fa";
 import Link from "next/link";
+import LikeComponent from "../Buttons/LikeComponent";
 
 // Component to display item information with an icon and text
 export const ItemInfo = ({ text, icon, className }) => (
@@ -57,32 +57,31 @@ const ImageCard = ({ image, title }) => {
 };
 
 // Component to display card information such as title and likes
-const CardInfo = ({ title, likes }) => {
+const CardInfo = ({ title, likes, calificaciones, id }) => {
     return (
         <div className="flex justify-between">
             <h3 className="text-xl font-light truncate">{title}</h3>
-            <span className="flex items-center gap-1">
-                <FaStar size={20} className="fill-amber-400" /> {likes}
-            </span>
+            <LikeComponent likes={likes} calificaciones={calificaciones} id={id} />
         </div>
     );
 };
 
+
 // Main CardLong component that combines all the above components
 const WideCard = ({ data }) => {
     return (
-        <Link href={{
-            pathname: `/receta/${encodeURIComponent(data.name)}`,
-            query: { id: data.id }
-        }}>
-            <div className="max-w-[396px] flex flex-col gap-2 max-h-[260px] hover:scale-105 transition-transform duration-300">
+        <div className="max-w-[396px] flex flex-col gap-2 max-h-[260px] hover:scale-105 transition-transform duration-300">
+            <Link href={{
+                pathname: `/receta/${encodeURIComponent(data.name)}`,
+                query: { id: data.id }
+            }}>
                 <div className="relative rounded-xl overflow-hidden ">
                     <ContainerItemsInfo time={`${data.time}'`} difficulty={data.difficulty} />
                     <ImageCard image={data.image} title={data.name} />
                 </div>
-                <CardInfo title={data.name} likes="120" />
-            </div >
-        </Link>
+            </Link>
+            <CardInfo title={data.name} likes={data.likesCount} calificaciones={data.calificaciones} id={data.id} size={20} />
+        </div >
     );
 };
 

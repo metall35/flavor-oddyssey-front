@@ -1,4 +1,5 @@
 import { TitleH2 } from "@/components/AuxComponents/Title"
+import LikeComponent from "@/components/Buttons/LikeComponent";
 import { ItemInfo } from "@/components/Cards/WideCard";
 import CustomSelect from "@/components/FormInputs/Select";
 import Container from "@/components/Sections/Container"
@@ -36,7 +37,7 @@ const ContainerItemsInfo = ({ time, difficulty, category }) => {
 
 const IngredientsSection = ({ data }) => {
     const [portion, setPortion] = useState(1);
-    
+
     // Generamos las opciones una sola vez al montar el componente
     const options = useMemo(() => {
         const opts = [];
@@ -90,7 +91,10 @@ const RecipeSection = ({ data }) => {
                 className="rounded-lg md:w-8/12 w-full aspect-video object-cover"
             />
             <div className="md:w-3/12 w-full">
-                <TitleH2 text={data.name} />
+                <div className="flex items-start gap-2">
+                    <TitleH2 text={data.name} />
+                    <LikeComponent likes={data.likesCount} calificaciones={data.calificaciones} id={data.id} size={25} />
+                </div>
                 <p className="text-xs mt-1 italic">Receta creada por: <span className="font-semibold">{data.autor.username}</span></p>
                 <p className="text-sm my-2">{data.description}</p>
                 <ContainerItemsInfo time={`${data.time}'`} difficulty={data.difficulty} category={data.category.name} />

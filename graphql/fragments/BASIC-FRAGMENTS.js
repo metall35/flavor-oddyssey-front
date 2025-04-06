@@ -26,5 +26,9 @@ export const BASIC_DETAILS_RECIPE_FRAGMENT = gql`
         id
         time
         difficulty
+        likesCount
+        calificaciones {
+            id
+        }
     }
 `

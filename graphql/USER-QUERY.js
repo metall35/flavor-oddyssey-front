@@ -5,6 +5,9 @@ export const USER_PERFIL_QUERY = gql`
     query {
         currentUser {
             ...UserProfile
+            calificaciones {
+                id
+            }
         }
     }
 
