@@ -8,9 +8,9 @@ const RecipeScrollVertical = ({ data }) => {
     const secondRow = data.slice(data.length / 2);
 
     return (
-        <div className="relative flex md:h-[500px] md:w-9/12 w-full flex-row items-center justify-center overflow-hidden">
+        <div className="relative flex md:h-[500px] w-full flex-row items-center justify-center overflow-hidden">
             {/* mobile Marquee */}
-            <div className="md:hidden">
+            <div className="block md:hidden">
                 <Marquee pauseOnHover className="[--duration:20s]">
                     {firstRow.map((review) => (
                         <Link href={{
@@ -54,7 +54,7 @@ const RecipeScrollVertical = ({ data }) => {
             </div>
 
             {/* Desktop Marquee */}
-            <div className="hidden md:block">
+            <div className="hidden md:flex">
                 <Marquee pauseOnHover vertical className="[--duration:20s]">
                     {firstRow.map((review) => (
                         <Link href={{
