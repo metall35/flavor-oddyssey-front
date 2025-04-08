@@ -1,7 +1,7 @@
 import GeneralButton from "./GeneralButton";
 
 const ButtonSubmit = ({ text, loading, disabled }) => (
-    <div className="flex justify-center mt-5">
+    <div className="flex justify-center">
         <GeneralButton
             text={loading ? "Cargando..." : text}
             type="submit"

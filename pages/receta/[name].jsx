@@ -1,18 +1,14 @@
 import { SINGLE_RECIPE_QUERY } from "@/graphql/SINGLE-RECIPE-QUERY";
-import { initializeApollo } from "@/lib/apolloClient";
+import { initializeApollo, useApollo } from "@/lib/apolloClient";
 import RecipeView from "@/sections/Recipe/RecipeView";
 
-const RecipePage = ({ id, result }) => {
+const RecipePage = ({ id, result, initialApolloState }) => {
+    const apolloClient = useApollo(initialApolloState);
 
-    if (!result) {
-        return (
-            <p>cargando....</p>
-        )
-    }
 
     return (
         <>
-            <RecipeView data={result} />
+            <RecipeView data={result} apolloClient={apolloClient}  />
         </>
     );
 };
@@ -31,6 +27,7 @@ export async function getServerSideProps(context) {
             props: {
                 result: data?.getReceta || null,
                 id,
+                initialApolloState: client.cache.extract(),
             },
         };
     } catch (error) {

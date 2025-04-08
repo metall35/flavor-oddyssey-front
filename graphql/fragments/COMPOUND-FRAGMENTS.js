@@ -22,16 +22,14 @@ export const ALL_DETAILS_RECIPE_FRAGMENT = gql`
                 name
             }
         }
-        calificaciones {
-            id
-        }
         comentarios {
             id
+            texto
+            puntuacion
+            fecha
             usuario {
                 ...UserBasicData
             }
-            texto
-            fecha
         }
     }
 
