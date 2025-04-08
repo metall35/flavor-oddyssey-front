@@ -4,7 +4,7 @@ import Image from "next/image";
 const RecipeCard = ({ image, name, time, difficulty, autor }) => {
     return (
         <figure
-            className="group relative max-h-96 cursor-pointer overflow-hidden rounded-xl border"
+            className="group relative max-h-40 max-w-80 md:max-h-96 cursor-pointer overflow-hidden rounded-xl border"
         >
             <Image
                 src={image}
@@ -14,7 +14,7 @@ const RecipeCard = ({ image, name, time, difficulty, autor }) => {
                 quality={80}
                 placeholder="blur"
                 blurDataURL="/image/recipe.png"
-                className="rounded-lg h-auto aspect-square object-cover"
+                className="rounded-lg h-auto md:aspect-square aspect-video object-cover"
             />
             <div className="absolute inset-0 bg-black/60 opacity-0 transition-opacity hover:opacity-100 duration-500 flex flex-col justify-center p-4 gap-2">
                 <div className="flex flex-col justify-center p-4 gap-2">

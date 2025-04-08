@@ -3,6 +3,8 @@ import CreateComment from "./CreateComment";
 import { IoIosStar, IoIosStarOutline } from "react-icons/io";
 import { useQuery } from "@apollo/client";
 import { SINGLE_RECIPE_QUERY } from "@/graphql/SINGLE-RECIPE-QUERY";
+import Image from "next/image";
+import { formatRelativeTime } from "@/lib/utils";
 
 const RecipeComments = ({ initialData, id }) => {
 
@@ -15,7 +17,7 @@ const RecipeComments = ({ initialData, id }) => {
     const comments = data?.getReceta?.recipe?.comentarios || initialData?.recipe?.comentarios || [];
 
     return (
-        <div className="w-full md:max-w-8/12 md:pl-26 md:pr-10 px-4 mb-10">
+        <div className="w-full md:max-w-8/12 lg:pl-26 lg:pr-10 md:pl-10 px-4 mb-10">
             <TitleH2 text="Comentarios" />
             <CreateComment  />
             <ul className="w-full">

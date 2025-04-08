@@ -11,7 +11,7 @@ import { SiStagetimer } from "react-icons/si";
 
 const ContainerItemsInfo = ({ time, difficulty, category }) => {
     return (
-        <div className="w-full flex gap-8 text-black my-2">
+        <div className="w-full flex lg:gap-8 md:gap-4 gap-8 text-black my-2">
             <ItemInfo text={time} icon={<CiTimer size={18} />} className="px-4" />
             <ItemInfo
                 className="p-2"
@@ -30,7 +30,7 @@ const ContainerItemsInfo = ({ time, difficulty, category }) => {
                     />
                 }
             />
-            <ItemInfo text={category} icon={<></>} className="md:px-4 px-2 text-center" />
+            <ItemInfo text={category} icon={<></>} className="md:px-4 px-2 py-2 text-center" />
         </div>
     );
 };
@@ -90,8 +90,8 @@ const RecipeSection = ({ data }) => {
                 blurDataURL="/image/recipe.png"
                 className="rounded-lg md:w-8/12 w-full aspect-video object-cover"
             />
-            <div className="md:w-3/12 w-full">
-                <div className="flex items-start gap-2">
+            <div className="md:w-6/12 lg:w-4/12 w-full">
+                <div className="flex items-center justify-between">
                     <TitleH2 text={data.name} />
                     <LikeComponent likes={data.likesCount} calificaciones={data.calificaciones} id={data.id} size={25} />
                 </div>
