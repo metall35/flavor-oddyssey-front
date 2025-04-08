@@ -2,6 +2,7 @@ import { TitleH2 } from "@/components/AuxComponents/Title";
 import CreateComment from "./CreateComment";
 import { IoIosStar, IoIosStarOutline } from "react-icons/io";
 import { useQuery } from "@apollo/client";
+import { SINGLE_RECIPE_QUERY } from "@/graphql/SINGLE-RECIPE-QUERY";
 
 const RecipeComments = ({ initialData, id }) => {
 
