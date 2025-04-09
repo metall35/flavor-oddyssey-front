@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-
+import { useSyncStorage } from "./useSyncStorage";
 
 const useSearch = () => {
     const [searchValue, setSearchValue] = useState("")
@@ -8,26 +8,33 @@ const useSearch = () => {
         status: false,
         message: ""
     })
+    const [searchHistory, setSearchHistory] = useSyncStorage("searchHistoryFlavor", [])
 
     const router = useRouter()
 
     const onChangeSearch = (e) => {
-        const { value } = e.target
-        setSearchValue(value)
-        if (value.length <= 1) {
-            setError({ ...error, status: false, message: "" })
+        const { value } = e.target;
+        setSearchValue(value);
+        if (value.length > 1 && error.status) {
+            setError({ status: false, message: "" })
         }
     }
 
-    const handleSearch = (e) => {
+    const handleSearch = async (e) => {
         e.preventDefault()
-        if (searchValue.trim()) {
-            router.push({
-                pathname: "/search",
-                query: { q: searchValue }
-            })
-        } else {
-            setError({ ...error, status: true, message: "No has ingresado un valor" })
+
+        if (!searchValue.trim()) {
+            setError({ status: true, message: "No has ingresado un valor" })
+            return
+        }
+
+        await router.push({
+            pathname: "/search",
+            query: { q: searchValue }
+        })
+
+        if (!searchHistory?.includes(searchValue)) {
+            setSearchHistory(prev => prev ? [...prev, searchValue] : [searchValue])
         }
     }
 
@@ -35,7 +42,8 @@ const useSearch = () => {
         searchValue,
         onChangeSearch,
         handleSearch,
-        error
+        error,
     }
 }
+
 export default useSearch

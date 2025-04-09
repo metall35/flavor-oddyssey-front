@@ -15,7 +15,7 @@ const HomeSection = ({ data }) => {
             <Container >
                 <ContentCategory data={data.categorias.slice(0, 12)} style="max-w-26" className="md:grid hidden grid-cols-3 md:grid-cols-6 lg:grid-cols-12" />
             </Container>
-            <SectionCard data={data.recetas} />
+            <SectionCard data={data.recetasLast} />
         </>
     );
 }
