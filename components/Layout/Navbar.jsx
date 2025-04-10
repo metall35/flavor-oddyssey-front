@@ -18,7 +18,7 @@ const Navbar = () => {
     const [isAnimating, setIsAnimating] = useState(false);
     const items = [
         { name: "Inicio", href: "/" },
-        { name: "Recetas", href: "/recipes" },
+        { name: "Recetas", href: "/todas-las-recetas" },
         { name: "Planea tu menú", href: "/menu" },
         { name: user ? <AvatarUser user={user} /> : <ButtonRegister />, href: user ? "" : "/login" },
     ]

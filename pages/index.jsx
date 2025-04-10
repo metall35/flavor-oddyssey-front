@@ -3,8 +3,6 @@ import { initializeApollo } from "@/lib/apolloClient";
 import HomeSection from "@/sections/Home/HomeSection";
 
 const Home = ({ result }) => {
-
-  console.log(result);
   
   return (
     <>
@@ -18,8 +16,6 @@ export async function getServerSideProps (ctx) {
   const searchHistory = ctx.req.cookies.searchHistoryFlavor
     ? JSON.parse(ctx.req.cookies.searchHistoryFlavor)
     : [];
-
-    console.log(searchHistory);
   
   const { data } = await apolloClient.query({
     query: HOME_QUERIES,
