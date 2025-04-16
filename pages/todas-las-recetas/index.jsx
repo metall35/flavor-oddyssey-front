@@ -5,7 +5,7 @@ import AllRecipesView from "@/sections/AllRecipes/AllRecipesView";
 const AllRecipesPage = ({ result }) => {
     return (
         <>
-            <AllRecipesView data={result.recetas} />
+            <AllRecipesView data={result.recetas} title="Todas las recetas" />
         </>
     );
 }

@@ -32,3 +32,29 @@ export const useAuthStore = create((set) => ({
         set({ isAuthenticated: !!token });
     }
 }));
+
+
+export const useCategoryAndFoodStore = create(set => ({
+    categories: [],
+    foods: [],
+    setData: data => set({ categories: data.categorias, foods: data.ingredientes })
+}));
+
+
+export const useSearchStore = create(set => ({
+    searchValue: "",
+    filtersValue: {
+        categoryValue: "",
+        time: "",
+        difficulty: "",
+        ingredients: []
+    },
+    setSearchValue: value => set({ searchValue: value }),
+    setFiltersValue: (updater) =>
+        set((state) => ({
+            filtersValue: typeof updater === "function"
+                ? updater(state.filtersValue) // Si es función, ejecútala
+                : updater, // Si es objeto, úsalo directamente
+        })),
+
+}))
