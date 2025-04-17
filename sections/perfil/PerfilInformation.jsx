@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const PerfilInformation = ({ user }) => {
-    const { inputsUser, handlePhotoChange, handleChange, error, errorImg, handleSubmit, img } = useUpdateUser({ user });
+    const { inputsUser, handlePhotoChange, handleChange, error, handleSubmit, img } = useUpdateUser({ user });
 
     return (
         <form className="flex flex-col gap-5 items-center w-full" onSubmit={handleSubmit}>
@@ -31,7 +31,6 @@ const PerfilInformation = ({ user }) => {
                         onChange={handlePhotoChange}
                     />
                 </label>
-                <NotifyError message={errorImg.message} status={errorImg.status} />
             </div>
             <Input label="Nombre de usuario" type="text" name="username" value={inputsUser.username} onChange={handleChange} error={{ status: false }} />
             <Input label="Correo electrónico" type="email" name="email" value={inputsUser.email} onChange={handleChange} disabled error={{ status: false }} />
