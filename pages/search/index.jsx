@@ -6,11 +6,11 @@ import AllRecipesView from "@/sections/AllRecipes/AllRecipesView";
 
 const SearchPage = ({ query, filters, result }) => {
 
-    if (!result.search) {
+    if (result.search.length == 0) {
         return (
-            <>
-                <p> No se encontraron resultados. </p>
-            </>
+            <div className="w-full h-[calc(100vh-280px)] flex justify-center py-5">
+                <p className=""> No se encontraron resultados. </p>
+            </div>
         )
     }
 
@@ -39,6 +39,8 @@ export async function getServerSideProps(ctx) {
         }
     })
 
+    console.log(data);
+    
 
     return {
         props: {
