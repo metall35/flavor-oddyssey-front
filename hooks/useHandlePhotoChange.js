@@ -1,7 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-const useHandlePhotoChange = ({ initialPhoto, updatePhoto }) => {
+const useHandlePhotoChange = ({ initialPhoto, updatePhoto, zustand = false }) => {
     const [img, setImg] = useState(initialPhoto);
 
     const handlePhotoChange = e => {
@@ -16,10 +16,16 @@ const useHandlePhotoChange = ({ initialPhoto, updatePhoto }) => {
 
             const reader = new FileReader();
             reader.onload = () => {
-                updatePhoto((prevState) => ({
-                    ...prevState,
-                    photo: e.target.files[0],
-                }));
+                if (zustand) {
+                    updatePhoto({
+                        photo: e.target.files[0],
+                    })
+                } else {
+                    updatePhoto((prevState) => ({
+                        ...prevState,
+                        photo: e.target.files[0],
+                    }));
+                }
                 setImg(reader.result);
             };
             reader.readAsDataURL(file);

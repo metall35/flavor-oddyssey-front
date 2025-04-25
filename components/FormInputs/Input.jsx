@@ -14,7 +14,7 @@ const Input = memo(({ type, name, label, required, value, onChange, error, disab
                 placeholder={label}
                 value={value}
                 onChange={onChange}
-                className={`w-full py-3 pl-6 pr-12 border shadow-lg rounded-2xl focus:outline-none ${error.status && "ring-2 ring-red-400"} 
+                className={`w-full py-3 px-6 border shadow-lg rounded-2xl focus:outline-none ${error.status && "ring-2 ring-red-400"} 
                             focus:ring-2 focus:ring-flavor-2 bg-white/60 text-sm sm:text-base`}
                 disabled={disabled}
             />

@@ -8,6 +8,12 @@ export const useIntersectionStore = create((set) => ({
     setIsVisible: (visible) => set({ isVisible: visible }),
 }));
 
+
+export const useUserData = create(set => ({
+    user: null,
+    setUser: user => set({ user })
+}))
+
 // export const useAuthStore = create((set) => ({
 //     refetch: null,
 //     setRefetch: (refetch) => set({ refetch }), // Método para establecer refetch

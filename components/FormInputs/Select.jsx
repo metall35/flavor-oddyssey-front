@@ -1,12 +1,13 @@
-import { useState, useRef } from "react";
+import { memo, useRef, useState } from "react";
 
-const CustomSelect = ({ label, name, options, onChange, value }) => {
+const CustomSelect = memo(({ label, name, options, onChange, value }) => {
     const [isOpen, setIsOpen] = useState(false);
     const selectRef = useRef(null);
 
-    const handleOptionClick = (optionValue) => {
-        onChange(optionValue);
-        setIsOpen(false); // Cerrar el dropdown después de seleccionar una opción
+    const handleOptionClick = (option) => {
+        // Si la opción tiene `data`, la enviamos completa; si no, solo el `value`
+        onChange(option.data || option.value);
+        setIsOpen(false);
     };
 
     return (
@@ -18,11 +19,11 @@ const CustomSelect = ({ label, name, options, onChange, value }) => {
             {/* Input visual del select */}
             <div
                 className={`pr-4 pl-2 py-2 bg-white text-sm border border-neutral-300 rounded-lg shadow-sm cursor-pointer w-full relative ${isOpen ? 'ring-flavor-2 ring-1' : ''}`}
-                onClick={() => setIsOpen(!isOpen)} // Abrir o cerrar el menú
+                onClick={() => setIsOpen(!isOpen)}
                 ref={selectRef}
             >
                 <span className={`block ${value === '' ? 'text-neutral-400/60' : 'text-black'}`}>
-                    {value ? options.find(option => option.value === value)?.label : 'Seleccione una opción'}
+                    {value ? options.find(opt => opt.value === value)?.label : 'Seleccione una opción'}
                 </span>
 
                 {/* Flecha SVG */}
@@ -39,9 +40,8 @@ const CustomSelect = ({ label, name, options, onChange, value }) => {
                     {options.map((option) => (
                         <li
                             key={option.value}
-                            className={`px-1 py-2 text-sm cursor-pointer hover:bg-andes/10 ${option.value === value ? 'bg-neutral-200' : ''
-                                }`}
-                            onClick={() => handleOptionClick(option.value)}
+                            className={`px-1 py-2 text-sm cursor-pointer hover:bg-andes/10 ${option.value === value ? 'bg-neutral-200' : ''}`}
+                            onClick={() => handleOptionClick(option)} // Pasamos toda la opción
                         >
                             {option.label}
                         </li>
@@ -50,6 +50,6 @@ const CustomSelect = ({ label, name, options, onChange, value }) => {
             )}
         </label>
     );
-};
+});
 
 export default CustomSelect;
