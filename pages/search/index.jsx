@@ -1,10 +1,14 @@
+import Loader from "@/components/AuxComponents/Loader";
 import { SEARCH_QUERY } from "@/graphql/SEARCH-QUERY";
 import { initializeApollo } from "@/lib/apolloClient";
-import AllRecipesView from "@/sections/AllRecipes/AllRecipesView";
+import dynamic from "next/dynamic";
 
+const AllRecipesView = dynamic(() => import('@/sections/AllRecipes/AllRecipesView'), {
+    ssr: false,
+    loading: () => <Loader />
+});
 
-
-const SearchPage = ({ query, filters, result }) => {
+const SearchPage = ({ result }) => {
 
     if (result.search.length == 0) {
         return (

@@ -2,15 +2,15 @@ import { welcomeBackground, content } from "@/styles/welcome-section.module.css"
 import Search from "@/components/Controls/Search";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 import { useEffect, useRef } from "react";
-import ContentCategory from "@/components/Sections/ContentCategory";
 import { TitleH1 } from "@/components/AuxComponents/Title";
+import ContentCategory from "@/components/Sections/ContentCategory";
 
 const WelcomeSection = ({ categories }) => {
     const { setTargetRef } = useIntersectionObserver()
     const searchRef = useRef(null)
 
     useEffect(() => {
-        console.log("myRef.current:", searchRef.current);
+        
         if (searchRef.current) {
             setTargetRef(searchRef.current);
         }

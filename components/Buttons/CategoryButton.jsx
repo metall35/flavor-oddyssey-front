@@ -9,6 +9,7 @@ const CategoryButton = ({ classes, image, text }) => {
                 width={296}
                 height={296}
                 quality={90}
+                loading="lazy"
                 placeholder="blur"
                 blurDataURL="/image/recipe.png"
                 className="rounded-full h-auto aspect-square object-cover "

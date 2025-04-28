@@ -1,12 +1,20 @@
 import Container from "@/components/Sections/Container";
-import ContentRecipe from "./ContentRecipe";
 import WelcomeSection from "./WelcomeSection";
-import ContentCategory from "@/components/Sections/ContentCategory";
+import dynamic from "next/dynamic";
+import Loader from "@/components/AuxComponents/Loader";
 import SectionCard from "./SectionCard";
 
+const ContentRecipe = dynamic(() => import("./ContentRecipe"), {
+    loading: () => <Loader />
+})
+
+const ContentCategory = dynamic(() => import("@/components/Sections/ContentCategory"), {
+    loading: () => <Loader />
+})
+
+
+
 const HomeSection = ({ data }) => {
-
-
 
     return (
         <>

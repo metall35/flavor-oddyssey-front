@@ -7,8 +7,8 @@ const Logo = () => (
             alt="recipe"
             width={60}
             height={60}
-            priority
             placeholder="blur"
+            loading="lazy"
             blurDataURL="/logo-flavor.svg"
             className="h-auto aspect-square object-cover"
         />

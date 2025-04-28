@@ -1,8 +1,13 @@
+import Loader from "@/components/AuxComponents/Loader";
 import { HOME_QUERIES } from "@/graphql/HOME-QUERIES";
 import { initializeApollo } from "@/lib/apolloClient";
-import HomeSection from "@/sections/Home/HomeSection";
-const Home = ({ result }) => {
+import dynamic from "next/dynamic";
 
+const HomeSection = dynamic(() => import('@/sections/Home/HomeSection'), {
+  ssr: false,
+  loading: () => <Loader />
+});
+const Home = ({ result }) => {
 
   return (
     <>

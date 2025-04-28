@@ -1,7 +1,17 @@
 import { Marquee } from "@/components/magicui/marquee";
-import RecipeCard from "./RecipeCard";
+// import RecipeCard from "./RecipeCard";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+import Loader from "@/components/AuxComponents/Loader";
 
+// const Marquee = dynamic(() => import("@/components/magicui/marquee"), {
+//     ssr: false,
+//     loading: () => <Loader />,
+// })
+
+const RecipeCard = dynamic(() => import("./RecipeCard"), {
+    loading: () => <Loader />,
+})
 
 const RecipeScrollVertical = ({ data }) => {
     const firstRow = data.slice(0, data.length / 2);

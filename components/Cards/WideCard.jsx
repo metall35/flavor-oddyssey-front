@@ -46,7 +46,8 @@ const ImageCard = ({ image, title }) => {
                 alt={title}
                 width={1920}
                 height={1080}
-                // quality={80}
+                quality={80}
+                loading="lazy"
                 placeholder="blur"
                 blurDataURL="/image/recipe.png"
                 className="rounded-lg h-full aspect-video object-cover "

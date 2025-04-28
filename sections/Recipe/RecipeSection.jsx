@@ -87,6 +87,7 @@ const RecipeSection = ({ data }) => {
                 height={1080}
                 placeholder="blur"
                 quality={90}
+                loading="lazy"
                 blurDataURL="/image/recipe.png"
                 className="rounded-lg md:w-8/12 w-full aspect-video object-cover"
             />

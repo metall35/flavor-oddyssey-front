@@ -21,6 +21,7 @@ const AvatarUser = ({ user }) => {
                 alt="User Avatar"
                 width={48}
                 height={48}
+                loading='lazy'
                 className="w-12 h-12 rounded-full cursor-pointer "
                 onClick={toggleMenu}
             />

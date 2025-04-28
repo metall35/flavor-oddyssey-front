@@ -1,4 +1,10 @@
-import WideCard from "@/components/Cards/WideCard"
+import Loader from "@/components/AuxComponents/Loader";
+import dynamic from "next/dynamic";
+
+const WideCard = dynamic(() => import("@/components/Cards/WideCard"), {
+    ssr: false,
+    loading: () => <Loader />
+});
 
 const SuggestRecipes = ({ data }) => {
     return (

@@ -1,7 +1,11 @@
+import Loader from "@/components/AuxComponents/Loader"
 import { TitleH2 } from "@/components/AuxComponents/Title"
-import WideCard from "@/components/Cards/WideCard"
 import Container from "@/components/Sections/Container"
+import dynamic from "next/dynamic"
 
+const WideCard = dynamic(() => import('@/components/Cards/WideCard'), {
+    loading: () => <Loader />
+})
 
 const AllRecipesView = ({ data, title }) => {
     

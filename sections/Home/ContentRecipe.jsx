@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
-import WideCard from "@/components/Cards/WideCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { TitleH2 } from "@/components/AuxComponents/Title";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
+import dynamic from "next/dynamic";
+import Loader from "@/components/AuxComponents/Loader";
+
+const WideCard = dynamic(() => import("@/components/Cards/WideCard"), {
+    loading: () => <Loader />,
+});
 
 const ContentRecipe = ({ data }) => {
     const [search] = useLocalStorage("searchHistoryFlavor", []);

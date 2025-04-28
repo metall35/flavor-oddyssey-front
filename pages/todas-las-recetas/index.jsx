@@ -1,6 +1,12 @@
+import Loader from "@/components/AuxComponents/Loader";
 import { ALL_RECIPES_QUERY } from "@/graphql/ALL-RECIPES-QUERY";
 import { initializeApollo } from "@/lib/apolloClient";
-import AllRecipesView from "@/sections/AllRecipes/AllRecipesView";
+import dynamic from "next/dynamic";
+
+const AllRecipesView = dynamic(() => import('@/sections/AllRecipes/AllRecipesView'), {
+    ssr: false,
+    loading: () => <Loader />
+});
 
 const AllRecipesPage = ({ result }) => {
     return (

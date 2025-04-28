@@ -1,7 +1,20 @@
-import RecipeComments from "./RecipeComments"
-import RecipeSection from "./RecipeSection"
-import SuggestRecipes from "./SuggestRecipes"
+import Loader from "@/components/AuxComponents/Loader";
+import dynamic from "next/dynamic";
 
+const RecipeSection = dynamic(() => import('./RecipeSection'), {
+    ssr: false,
+    loading: () => <Loader />
+});
+
+const RecipeComments = dynamic(() => import('./RecipeComments'), {
+    ssr: false,
+    loading: () => <Loader />
+});
+
+const SuggestRecipes = dynamic(() => import('./SuggestRecipes'), {
+    ssr: false,
+    loading: () => <Loader />
+});
 
 const RecipeView = ({ data }) => {
     
