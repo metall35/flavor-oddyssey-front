@@ -23,7 +23,7 @@ const RecipeScrollVertical = ({ data }) => {
             <div className="block md:hidden">
                 <Marquee pauseOnHover className="[--duration:20s]">
                     {firstRow.map((review) => (
-                        <Link href={{
+                        <Link key={review.id} href={{
                             pathname: `/receta/${encodeURIComponent(review.name)}`,
                             query: { id: review.id }
                         }}>
@@ -33,7 +33,7 @@ const RecipeScrollVertical = ({ data }) => {
                 </Marquee>
                 <Marquee reverse pauseOnHover className="[--duration:20s]">
                     {secondRow.map((review) => (
-                        <Link href={{
+                        <Link key={review.id} href={{
                             pathname: `/receta/${encodeURIComponent(review.name)}`,
                             query: { id: review.id }
                         }}>
@@ -43,7 +43,7 @@ const RecipeScrollVertical = ({ data }) => {
                 </Marquee>
                 <Marquee pauseOnHover className="[--duration:20s]">
                     {firstRow.map((review) => (
-                        <Link href={{
+                        <Link key={review.id} href={{
                             pathname: `/receta/${encodeURIComponent(review.name)}`,
                             query: { id: review.id }
                         }}>
@@ -53,7 +53,7 @@ const RecipeScrollVertical = ({ data }) => {
                 </Marquee>
                 <Marquee reverse pauseOnHover className="[--duration:20s]">
                     {secondRow.map((review) => (
-                        <Link href={{
+                        <Link key={review.id} href={{
                             pathname: `/receta/${encodeURIComponent(review.name)}`,
                             query: { id: review.id }
                         }}>
@@ -67,7 +67,7 @@ const RecipeScrollVertical = ({ data }) => {
             <div className="hidden md:flex">
                 <Marquee pauseOnHover vertical className="[--duration:20s]">
                     {firstRow.map((review) => (
-                        <Link href={{
+                        <Link key={review.id} href={{
                             pathname: `/receta/${encodeURIComponent(review.name)}`,
                             query: { id: review.id }
                         }}>
@@ -77,7 +77,7 @@ const RecipeScrollVertical = ({ data }) => {
                 </Marquee>
                 <Marquee reverse pauseOnHover vertical className="[--duration:20s]">
                     {secondRow.map((review) => (
-                        <Link href={{
+                        <Link key={review.id} href={{
                             pathname: `/receta/${encodeURIComponent(review.name)}`,
                             query: { id: review.id }
                         }}>
@@ -87,7 +87,7 @@ const RecipeScrollVertical = ({ data }) => {
                 </Marquee>
                 <Marquee pauseOnHover vertical className="[--duration:20s]">
                     {firstRow.map((review) => (
-                        <Link href={{
+                        <Link key={review.id} href={{
                             pathname: `/receta/${encodeURIComponent(review.name)}`,
                             query: { id: review.id }
                         }}>
@@ -97,7 +97,7 @@ const RecipeScrollVertical = ({ data }) => {
                 </Marquee>
                 <Marquee reverse pauseOnHover vertical className="[--duration:20s]">
                     {secondRow.map((review) => (
-                        <Link href={{
+                        <Link key={review.id} href={{
                             pathname: `/receta/${encodeURIComponent(review.name)}`,
                             query: { id: review.id }
                         }}>

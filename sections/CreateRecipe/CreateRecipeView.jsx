@@ -1,15 +1,19 @@
-
 import Container from "@/components/Sections/Container"
 import GeneralButton from "@/components/Buttons/GeneralButton";
 import AddIngredients from "./Components/AddIngredients";
-import AddIngredientsModal from "./Components/AddIngredientsModal";
 import AddSteps from "./Components/AddSteps";
 import EditableItemsInfo from "./Components/EditableItemsInfo";
 import EditableDescription from "./Components/EditableDescription";
 import EditableTitle from "./Components/EditableTitle";
 import useCreateRecipe from "@/hooks/useCreateRecipe";
 import EdtiableImage from "./Components/EditableImage";
+import dynamic from "next/dynamic";
+import Loader from "@/components/AuxComponents/Loader";
 
+const AddIngredientsModal = dynamic(() => import("./Components/AddIngredientsModal"), {
+    ssr: false,
+    loading: () => <Loader />,
+});
 
 
 const CreateRecipeView = () => {

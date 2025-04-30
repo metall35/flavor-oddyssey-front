@@ -1,8 +1,14 @@
+import { useEffect } from 'react';
 import { useAuthStore } from './useStore';
 
 
 const useRedirect = () => {
-    const { isAuthenticated } = useAuthStore(); // Asume que tu store tiene esta propiedad
+    const { isAuthenticated, checkAuth } = useAuthStore(); 
+
+    useEffect(() => {
+        checkAuth(); // Verifica el estado de autenticación al cargar el hook
+    }, [checkAuth]);
+
 
     const getRedirectPath = (destinationPath) => {
         if (!isAuthenticated) {

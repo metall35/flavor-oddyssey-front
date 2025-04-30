@@ -34,7 +34,7 @@ const ContentRecipe = ({ data }) => {
                 className="mySwiper"
             >
                 {data.map((value, index) => (
-                    <SwiperSlide key={index} className="p-4">
+                    <SwiperSlide key={index} className="p-4 grid grid-cols-1 place-items-center w-full">
                         <WideCard data={value} />
                     </SwiperSlide>
                 ))}

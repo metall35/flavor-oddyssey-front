@@ -32,11 +32,27 @@ export const useRecipeStore = create((set) => ({
                 ingredients: [...state.recipe.ingredients, ingredient],
             },
         })),
+    removeIngredient: (ingredientId) =>
+        set((state) => ({
+            recipe: {
+                ...state.recipe,
+                ingredients: state.recipe.ingredients.filter(
+                    (ingredient) => ingredient.ingredienteId !== ingredientId
+                ),
+            },
+        })),
     addStep: (step) =>
         set((state) => ({
             recipe: {
                 ...state.recipe,
                 steps: [...state.recipe.steps, step],
+            },
+        })),
+    removeStep: (stepId) =>
+        set((state) => ({
+            recipe: {
+                ...state.recipe,
+                steps: state.recipe.steps.filter((step) => step !== stepId),
             },
         })),
     resetRecipe: () =>
