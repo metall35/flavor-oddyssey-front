@@ -19,7 +19,7 @@ const Navbar = () => {
     const items = [
         { name: "Inicio", href: "/" },
         { name: "Recetas", href: "/todas-las-recetas" },
-        { name: "Planea tu menú", href: "/menu" },
+        // { name: "Planea tu menú", href: "/menu" },
         { name: user ? <AvatarUser user={user} /> : <ButtonRegister />, href: user ? "" : "/login" },
     ]
 

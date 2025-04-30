@@ -1,6 +1,12 @@
+import Loader from "@/components/AuxComponents/Loader";
 import { CATEGORY_AND_FOOD_QUERY } from "@/graphql/CATEGORY-AND-FOOD-QUERY";
 import { initializeApollo } from "@/lib/apolloClient";
-import CategoryView from "@/sections/Category/CategoryView";
+import dynamic from "next/dynamic";
+
+const CategoryView = dynamic(() => import("@/sections/Category/CategoryView"), {
+    ssr: false,
+    loading: () => <Loader />,
+})
 
 const categoryPage = ({ data }) => {
     console.log("Category Page Data:", data);

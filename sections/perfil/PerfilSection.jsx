@@ -56,7 +56,7 @@ const PerfilSection = ({ data }) => {
     };
 
     return (
-        <Container className="flex gap-10 pb-10">
+        <Container className="flex flex-col md:flex-row gap-10 pb-10">
             <SlideNav onNavigate={handleNavigation} section={activeContent} />
             <div className="flex-1">{renderContent()}</div>
         </Container>

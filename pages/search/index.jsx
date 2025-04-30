@@ -42,8 +42,6 @@ export async function getServerSideProps(ctx) {
             ingredient: newFilters.ingredients
         }
     })
-
-    console.log(data);
     
 
     return {
