@@ -1,6 +1,5 @@
 import { CREATE_USER, LOGIN } from '@/graphql/mutations/LOGIN-MUTATIONS';
 import { useMutation } from '@apollo/client';
-import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useUser } from './useUser';
