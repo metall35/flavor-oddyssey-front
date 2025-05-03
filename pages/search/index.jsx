@@ -3,25 +3,16 @@ import { SEARCH_QUERY } from "@/graphql/SEARCH-QUERY";
 import { initializeApollo } from "@/lib/apolloClient";
 import dynamic from "next/dynamic";
 
-const AllRecipesView = dynamic(() => import('@/sections/AllRecipes/AllRecipesView'), {
+const AllRecipesView = dynamic(() => import('@/sections/Search/SearchView'), {
     ssr: false,
     loading: () => <Loader />
 });
 
 const SearchPage = ({ result }) => {
 
-    if (result.search.length == 0) {
-        return (
-            <div className="w-full h-[calc(100vh-280px)] flex justify-center py-5">
-                <p className=""> No se encontraron resultados. </p>
-            </div>
-        )
-    }
-
-
     return (
         <>
-            <AllRecipesView data={result.search} title={`Resultados (${result.search.length})`} />
+            <AllRecipesView result={result} />
         </>
     )
 }
@@ -42,7 +33,7 @@ export async function getServerSideProps(ctx) {
             ingredient: newFilters.ingredients
         }
     })
-    
+
 
     return {
         props: {
