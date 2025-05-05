@@ -11,6 +11,7 @@ export const useRecipeStore = create((set) => ({
         ingredients: [],
         steps: [],
         photo: null,
+        edit: false
     },
     getInitialValues: () => ({
         title: "Título de la receta",
