@@ -1,10 +1,15 @@
+import Loader from "@/components/AuxComponents/Loader";
 import { SINGLE_RECIPE_QUERY } from "@/graphql/SINGLE-RECIPE-QUERY";
 import { initializeApollo, useApollo } from "@/lib/apolloClient";
-import RecipeView from "@/sections/Recipe/RecipeView";
+import dynamic from "next/dynamic";
+
+const RecipeView = dynamic(() => import('@/sections/Recipe/RecipeView'), {
+    ssr: false,
+    loading: () => <Loader />
+});
 
 const RecipePage = ({ id, result, initialApolloState }) => {
     const apolloClient = useApollo(initialApolloState);
-
 
     return (
         <>

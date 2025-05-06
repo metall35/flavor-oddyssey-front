@@ -46,10 +46,11 @@ const ImageCard = ({ image, title }) => {
                 alt={title}
                 width={1920}
                 height={1080}
-                // quality={80}
+                quality={80}
+                loading="lazy"
                 placeholder="blur"
                 blurDataURL="/image/recipe.png"
-                className="rounded-lg h-auto aspect-video object-cover "
+                className="rounded-lg h-full aspect-video object-cover "
             />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent/70 to-black/90 "></div>
         </>
@@ -60,7 +61,7 @@ const ImageCard = ({ image, title }) => {
 const CardInfo = ({ title, likes, calificaciones, id }) => {
     return (
         <div className="flex justify-between">
-            <h3 className="text-xl font-light truncate">{title}</h3>
+            <h3 className="text-lg sm:text-xl font-light truncate max-w-[300px] sm:max-w-[200px]">{title}</h3>
             <LikeComponent likes={likes} calificaciones={calificaciones} id={id} />
         </div>
     );

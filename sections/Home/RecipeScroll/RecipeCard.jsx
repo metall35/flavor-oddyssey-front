@@ -15,6 +15,7 @@ const RecipeCard = ({ image, name, time, difficulty, autor }) => {
                 height={220}
                 quality={80}
                 placeholder="blur"
+                loading="lazy"
                 blurDataURL="/image/recipe.png"
                 className="rounded-lg h-auto md:aspect-square aspect-video object-cover"
             />

@@ -23,7 +23,7 @@ const LoginSection = () => {
                 quality={80}
                 placeholder="blur"
                 blurDataURL="/image/image-login.jpg"
-                className="rounded-sm h-auto aspect-video object-cover w-5xl hidden md:block"
+                className="rounded-2xl h-auto aspect-video object-cover w-5xl hidden md:block"
             />
             <div className='flex flex-col gap-4 lg:w-1/2 w-full p-5 bg-white rounded-2xl shadow-lg'>
                 <div className="flex mb-4 w-full ">

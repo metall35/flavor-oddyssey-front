@@ -99,6 +99,7 @@ const CreateComment = () => {
                     width={48}
                     height={48}
                     placeholder="blur"
+                    loading="lazy"
                     blurDataURL="/image/recipe.png"
                     className="rounded-full w-10 h-10 aspect-square object-cover "
                 />

@@ -1,7 +1,12 @@
+import Loader from "@/components/AuxComponents/Loader";
 import { HOME_QUERIES } from "@/graphql/HOME-QUERIES";
-import { initializeApollo } from "@/lib/apolloClient"; // Importar la función para inicializar el cliente de Apollo
-import HomeSection from "@/sections/Home/HomeSection";
+import { initializeApollo } from "@/lib/apolloClient";
+import dynamic from "next/dynamic";
 
+const HomeSection = dynamic(() => import('@/sections/Home/HomeSection'), {
+  ssr: false,
+  loading: () => <Loader />
+});
 const Home = ({ result }) => {
 
   return (
@@ -11,21 +16,25 @@ const Home = ({ result }) => {
   );
 }
 
-export const getStaticProps = async () => {
-  const apolloClient = initializeApollo();
-  const { data } = await apolloClient.query({
-    query: HOME_QUERIES, // Realizar la consulta GraphQL
-  });
+export async function getServerSideProps(ctx) {
+  const apolloClient = initializeApollo(null, ctx);
+  const searchHistory = ctx.req.cookies.searchHistoryFlavor
+    ? JSON.parse(ctx.req.cookies.searchHistoryFlavor)
+    : [];
 
-  const responseSize = JSON.stringify(data).length; // Calcular el tamaño de la respuesta
-  console.log(`Tamaño de la respuesta en el servidor: ${responseSize} bytes`); // Imprimir en el servidor
+  const { data } = await apolloClient.query({
+    query: HOME_QUERIES,
+    variables: {
+      search: searchHistory,
+    },
+  })
 
   return {
     props: {
-      result: data, // Pasar los datos obtenidos como props
-      initialApolloState: apolloClient.cache.extract(), // Pasar el estado inicial de Apollo
+      result: data,
+      initialApolloState: apolloClient.cache.extract(),
     },
-  };
+  }
 }
 
 export default Home

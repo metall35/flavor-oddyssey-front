@@ -3,42 +3,17 @@ import { UPDATE_USER_MUTATION } from '@/graphql/mutations/USER-MUTATIONS';
 import { useMutation } from '@apollo/client';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import useHandlePhotoChange from './useHandlePhotoChange';
 
 
 const useUpdateUser = ({ user }) => {
-    const [errorImg, setErrorImg] = useState({ message: '', status: false });
     const [error, setError] = useState({ message: '', status: false });
     const [inputsUser, setUser] = useState({
         username: user.username,
         email: user.email,
         photo: user.photo,
     })
-    const [img, setImg] = useState(user.photo);
-
-    const handlePhotoChange = e => {
-        const file = e.target.files[0];
-        const maxFileSize = 5 * 1024 * 1024; // 5MB in bytes
-
-        if (file) {
-            if (file.size > maxFileSize) {
-                setErrorImg({
-                    message: 'El archivo es demasiado grande',
-                    status: true
-                });
-                return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = () => {
-                setUser((prevState) => ({
-                    ...prevState,
-                    photo: e.target.files[0],
-                }));
-                setImg(reader.result);
-            };
-            reader.readAsDataURL(file);
-        }
-    }
+    const { handlePhotoChange, img } = useHandlePhotoChange({ initialPhoto:user.photo, updatePhoto: setUser })
 
     const handleChange = e => {
         setUser({
@@ -72,7 +47,7 @@ const useUpdateUser = ({ user }) => {
             const updatedFields = Object.fromEntries(
                 Object.entries(inputsUser).filter(([key, value]) => value !== user[key])
             );
-            
+
             if (Object.keys(updatedFields).length > 0) {
                 updateUser({
                     variables: {
@@ -95,7 +70,6 @@ const useUpdateUser = ({ user }) => {
         handlePhotoChange,
         handleChange,
         error,
-        errorImg,
         handleSubmit,
         img
     }

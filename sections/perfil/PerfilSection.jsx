@@ -2,9 +2,23 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Container from "@/components/Sections/Container";
 import SlideNav from "@/sections/perfil/SlideNav";
-import PerfilInformation from "./PerfilInformation";
-import UserRecipes from "./UserRecipes";
-import UserLikes from "./UserLikes";
+import Loader from "@/components/AuxComponents/Loader";
+import dynamic from "next/dynamic";
+
+const PerfilInformation = dynamic(() => import("./PerfilInformation"), {
+    ssr: false,
+    loading: () => <Loader />,
+});
+
+const UserRecipes = dynamic(() => import("./UserRecipes"), {
+    ssr: false,
+    loading: () => <Loader />,
+});
+
+const UserLikes = dynamic(() => import("./UserLikes"), {
+    ssr: false,
+    loading: () => <Loader />,
+});
 
 const PerfilSection = ({ data }) => {
     const router = useRouter();
@@ -20,7 +34,7 @@ const PerfilSection = ({ data }) => {
 
 
     if (!data) {
-        return <div>Cargando...</div>;
+        return <Loader />
     }
 
     const handleNavigation = (newSection) => {
@@ -42,7 +56,7 @@ const PerfilSection = ({ data }) => {
     };
 
     return (
-        <Container className="flex gap-10 pb-10 lg:h-[calc(100vh-12rem)]">
+        <Container className="flex flex-col md:flex-row gap-10 pb-10">
             <SlideNav onNavigate={handleNavigation} section={activeContent} />
             <div className="flex-1">{renderContent()}</div>
         </Container>

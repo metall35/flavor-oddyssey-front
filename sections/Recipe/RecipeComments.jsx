@@ -1,10 +1,16 @@
 import { TitleH2 } from "@/components/AuxComponents/Title";
-import CreateComment from "./CreateComment";
 import { IoIosStar, IoIosStarOutline } from "react-icons/io";
 import { useQuery } from "@apollo/client";
 import { SINGLE_RECIPE_QUERY } from "@/graphql/SINGLE-RECIPE-QUERY";
 import Image from "next/image";
 import { formatRelativeTime } from "@/lib/utils";
+import dynamic from "next/dynamic";
+import Loader from "@/components/AuxComponents/Loader";
+
+const CreateComment = dynamic(() => import('./CreateComment'), {
+    ssr: false,
+    loading: () => <Loader />
+});
 
 const RecipeComments = ({ initialData, id }) => {
 
@@ -31,6 +37,7 @@ const RecipeComments = ({ initialData, id }) => {
                                     width={48}
                                     height={48}
                                     placeholder="blur"
+                                    loading="lazy"
                                     blurDataURL="/image/recipe.png"
                                     className="rounded-full w-10 h-10 aspect-square object-cover "
                                 />

@@ -1,10 +1,20 @@
+import { useAuthStore } from '@/hooks/useStore';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const AvatarUser = ({ user }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const router = useRouter()
+    const router = useRouter();
+    const { logout } = useAuthStore();
+    const menuRef = useRef(null);
+
+    const handleLogout = () => {
+        logout();
+        router.push('/').then(() => {
+            router.reload();
+        });
+    };
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -12,16 +22,31 @@ const AvatarUser = ({ user }) => {
 
     const handleProfile = () => {
         router.push('/perfil');
-    }
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setIsMenuOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     return (
-        <div className="relative inline-block">
+        <div className="relative inline-block" ref={menuRef}>
             <Image
                 src={user.photo}
                 alt="User Avatar"
                 width={48}
                 height={48}
-                className="w-12 h-12 rounded-full cursor-pointer "
+                loading="lazy"
+                autoFocus
+                className="w-12 h-12 rounded-full cursor-pointer"
                 onClick={toggleMenu}
             />
             {isMenuOpen && (
@@ -38,6 +63,7 @@ const AvatarUser = ({ user }) => {
                         </li>
                         <li
                             className="px-4 py-2 hover:bg-gray-100 cursor-pointer rounded-2xl text-md"
+                            onClick={handleLogout}
                         >
                             Cerrar sesión
                         </li>

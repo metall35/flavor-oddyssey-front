@@ -7,7 +7,7 @@ const ContentCategory = ({ data, style, className }) => {
     return (
         <div className={`items-start justify-items-center gap-3 ${className}`}>
             {data?.map(category => (
-                <CategoryButton classes={style} key={category.id} image={category.image} text={category.name} />
+                <CategoryButton classes={style} key={category.id} id={category.id} image={category.image} text={category.name} />
             ))}
         </div>
     )
