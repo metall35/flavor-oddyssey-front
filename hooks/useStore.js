@@ -1,6 +1,8 @@
 import Cookies from "js-cookie";
 import { create } from "zustand";
 
+const cookieTokenName = process.env.COOKIETOKEN; // Obtiene el nombre del token desde el .env
+
 export const useIntersectionStore = create((set) => ({
     targetRef: null,
     isVisible: false,
@@ -14,27 +16,21 @@ export const useUserData = create(set => ({
     setUser: user => set({ user })
 }))
 
-// export const useAuthStore = create((set) => ({
-//     refetch: null,
-//     setRefetch: (refetch) => set({ refetch }), // Método para establecer refetch
-//     token: Cookies.get("tokenFlavorOdyssey"), // Maneja solo el token en el store
-// }));
-
 export const useAuthStore = create((set) => ({
     isAuthenticated: false,
 
     login: (token) => {
-        Cookies.set('tokenFlavorOdyssey', token, { expires: 1 / 24 });
+        Cookies.set(cookieTokenName, token, { expires: 1 / 24 });
         set({ isAuthenticated: true });
     },
 
     logout: () => {
-        Cookies.remove('tokenFlavorOdyssey');
+        Cookies.remove(cookieTokenName);
         set({ isAuthenticated: false });
     },
 
     checkAuth: () => {
-        const token = Cookies.get('tokenFlavorOdyssey');
+        const token = Cookies.get(cookieTokenName);
         set({ isAuthenticated: !!token });
     }
 }));

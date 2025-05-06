@@ -5,6 +5,9 @@ import { useUser } from './useUser';
 import { useRouter } from 'next/router';
 import { useRecipeStore } from '@/context/useRecipeStore';
 import { SINGLE_RECIPE_QUERY } from '@/graphql/SINGLE-RECIPE-QUERY';
+import Cookies from "js-cookie";
+
+const cookieTokenName = process.env.COOKIETOKEN; // Obtiene el nombre del token desde el .env
 
 const useUserRecipe = () => {
     const { refetch } = useUser()
@@ -44,7 +47,12 @@ const useUserRecipe = () => {
                 duration: 5000
             })
             refetch()
-        }
+        },
+        context: {
+            headers: {
+                authorization: `JWT ${Cookies.get(cookieTokenName)}`, // Usa el token desde las cookies
+            },
+        },
     })
 
     const handleView = ({ recipeId, recipeName }) => {
