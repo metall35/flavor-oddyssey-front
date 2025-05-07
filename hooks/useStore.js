@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import { create } from "zustand";
 
-const cookieTokenName = process.env.COOKIETOKEN; // Obtiene el nombre del token desde el .env
+const cookieTokenName = process.env.NEXT_PUBLIC_COOKIETOKEN; // Obtiene el nombre del token desde el .env
 
 export const useIntersectionStore = create((set) => ({
     targetRef: null,
