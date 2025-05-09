@@ -20,6 +20,23 @@ module.exports = {
                 port: '8000',
                 pathname: '/media/users/**',
             },
+            
+            {
+                protocol: 'https',
+                hostname: 'res.cloudinary.com', 
+                pathname: '/**', 
+            },
+            // {
+            //     protocol: 'https',
+            //     hostname: 'res.cloudinary.com', 
+            //     pathname: '/media/categorias/**',
+            // },
+            // {
+            //     protocol: 'https',
+            //     hostname: 'res.cloudinary.com', 
+            //     pathname: '/media/users/**',
+            // },
+
         ],
     },
 };

@@ -13,7 +13,7 @@ const useUpdateUser = ({ user }) => {
         email: user.email,
         photo: user.photo,
     })
-    const { handlePhotoChange, img } = useHandlePhotoChange({ initialPhoto:user.photo, updatePhoto: setUser })
+    const { handlePhotoChange, img } = useHandlePhotoChange({ initialPhoto: user.photo, updatePhoto: setUser })
 
     const handleChange = e => {
         setUser({
@@ -31,13 +31,16 @@ const useUpdateUser = ({ user }) => {
         },
         update: (store, { data }) => {
             const dataInCache = store.readQuery({ query: USER_PERFIL_QUERY })
-            store.writeQuery({
-                query: USER_PERFIL_QUERY,
-                data: {
-                    ...dataInCache,
-                    currentUser: data.updateUser.user
-                }
-            })
+            if (data.updateUser .user != null) {
+                store.writeQuery({
+                    query: USER_PERFIL_QUERY,
+                    data: {
+                        ...dataInCache,
+                        currentUser: data.updateUser.user
+                    }
+                })
+                toast.success('Perfil actualizado');
+            }
         }
     })
 
@@ -56,7 +59,6 @@ const useUpdateUser = ({ user }) => {
                     }
                 });
             }
-            toast.success('Perfil actualizado');
         } catch (error) {
             setError({
                 message: 'Algo salió mal',
