@@ -21,7 +21,7 @@ const EditableItemsInfo = () => {
     );
 
     return (
-        <div className="w-full flex lg:gap-8 md:gap-4 gap-8 text-black my-2">
+        <div className="w-full h-20 grid grid-cols-3 lg:gap-8 md:gap-4 gap-8 items-center text-black my-2">
             <Input
                 name="time"
                 label="Tiempo"

@@ -16,7 +16,7 @@ const useUserRecipe = () => {
     const { refetch: refetchRecipe, loading } = useQuery(SINGLE_RECIPE_QUERY, {
         fetchPolicy: "network-only",
         onCompleted: (data) => {
-            console.log(data);
+            // console.log(data);
             setUpdateRecipe({
                 title: data.getReceta.recipe.name,
                 description: data.getReceta.recipe.description,

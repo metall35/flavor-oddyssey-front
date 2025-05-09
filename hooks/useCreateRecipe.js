@@ -94,8 +94,6 @@ const useCreateRecipe = () => {
             }
         }
     };
-
-    console.log(recipe);
     
 
     return {
