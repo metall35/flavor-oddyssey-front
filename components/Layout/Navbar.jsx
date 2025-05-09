@@ -44,7 +44,7 @@ const Navbar = () => {
                     {isOpen ? <RxCross1 size={40} /> : <RxHamburgerMenu size={40} />}
                 </button>
             </nav>
-            <NavMobile isOpen={isOpen} isAnimating={isAnimating} toggleMenu={toggleMenu} items={items} user={user} />
+            <NavMobile  isOpen={isOpen} isAnimating={isAnimating} toggleMenu={toggleMenu} items={items} user={user} />
             <SearchBar isVisibleSearch={isVisibleSearch} />
         </>
     );

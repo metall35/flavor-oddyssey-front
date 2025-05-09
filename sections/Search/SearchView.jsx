@@ -25,7 +25,7 @@ const SearchView = ({ result }) => {
         <>
             <Container className="">
                 <p>filtros:</p>
-                <div className="flex justify-start items-center gap-2">
+                <div className="grid grid-cols-2 md:grid-cols-4 justify-start items-center gap-2">
                     <MemoizedCustomSelect
                         label={"Categorias"}
                         name={"category"}

@@ -4,12 +4,13 @@ export function middleware(request) {
     const url = request.nextUrl.clone();
     const currentPath = url.pathname; // Guardamos la ruta actual antes de modificarla
 
-    const privatePaths = ["/crear-receta", "/perfil", "/perfil/informacion-personal", "/perfil/recetas", "/perfil/likes"];
+    // const privatePaths = ["/crear-receta", "/perfil", "/perfil/informacion-personal", "/perfil/recetas", "/perfil/likes"];
+    const privatePaths = [];
     const isPrivatePath = privatePaths.some(path => currentPath === path);
 
-    console.log('Middleware executed');
-    console.log('Current Path:', currentPath);
-    console.log('Is Private Path:', isPrivatePath);
+    // console.log('Middleware executed');
+    // console.log('Current Path:', currentPath);
+    // console.log('Is Private Path:', isPrivatePath);
 
     // Verifica si la ruta es privada
     if (!isPrivatePath) {
@@ -20,14 +21,14 @@ export function middleware(request) {
     // Obtiene el token de la sesión
     const token = request.cookies.get('tokenFlavorOdyssey')?.value;
 
-    console.log('Token:', token);
+    // console.log('Token:', token);
 
     // Si no hay token, redirigir al inicio de sesión
     if (!token) {
         const loginUrl = new URL('/login', request.url);
         // Guardamos la ruta original (currentPath) en el parámetro returnUrl
         loginUrl.searchParams.set('returnUrl', currentPath);
-        console.log('Redirecting to:', loginUrl.toString());
+        // console.log('Redirecting to:', loginUrl.toString());
         return NextResponse.redirect(loginUrl);
     }
 
