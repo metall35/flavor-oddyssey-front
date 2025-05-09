@@ -4,8 +4,8 @@ export function middleware(request) {
     const url = request.nextUrl.clone();
     const currentPath = url.pathname; // Guardamos la ruta actual antes de modificarla
 
-    // const privatePaths = ["/crear-receta", "/perfil", "/perfil/informacion-personal", "/perfil/recetas", "/perfil/likes"];
-    const privatePaths = [];
+    const privatePaths = ["/crear-receta", "/perfil", "/perfil/informacion-personal", "/perfil/recetas", "/perfil/likes"];
+    // const privatePaths = [];
     const isPrivatePath = privatePaths.some(path => currentPath === path);
 
     // console.log('Middleware executed');
